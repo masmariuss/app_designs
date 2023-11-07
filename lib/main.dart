@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Diseños App',
-      home: SlideshowPage()
+      home: PinterestPage()
+      // home: PinterestPage()
     );
   }
 }
