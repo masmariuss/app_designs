@@ -32,7 +32,7 @@ class _PinterestMenuLocation extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final widthScreen = MediaQuery.of(context).size.width;
-    final mostrar = Provider.of<_MenuModel>(context, listen: false).mostrar;
+    final mostrar = Provider.of<_MenuModel>(context).mostrar;
 
     return Positioned(
       bottom: 28,
@@ -75,13 +75,28 @@ class _PinterestGridState extends State<PinterestGrid> {
   @override
   void initState() {
 
+    /* controller.addListener(() {
+      print('ScrollListener ${controller.offset}');
+    }); */
     controller.addListener(() {
-      
-      if (controller.offset > scrollAnterior && controller.offset > 150) {
-        Provider.of<_MenuModel>(context, listen: false).mostrar = false;
+
+    /* if (controller.offset > scrollAnterior) {
+      print('Ocultar menú');
       } else {
-        Provider.of<_MenuModel>(context, listen: false).mostrar = true;
-      }
+        print('Mostrar menú');
+      }  */
+
+      
+    if (controller.offset > scrollAnterior && controller.offset > 150) {
+      Provider.of<_MenuModel>(context, listen: false).mostrar = false;
+    } else {
+      Provider.of<_MenuModel>(context, listen: false).mostrar = true;
+    }
+    /* if (controller.offset > scrollAnterior && controller.offset > 150) {
+      Provider.of<_MenuModel>(context, listen: false).mostrar = false;
+    } else {
+      Provider.of<_MenuModel>(context, listen: false).mostrar = true;
+    } */
 
       scrollAnterior = controller.offset;
     });
