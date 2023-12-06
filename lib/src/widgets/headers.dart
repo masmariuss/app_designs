@@ -194,26 +194,35 @@ class _HeaderCurvoPainter extends CustomPainter {
 }
 
 class HeaderWave extends StatelessWidget {
-  const HeaderWave({super.key});
+
+  final Color color;
+
+  const HeaderWave({super.key, required this.color});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: CustomPaint(
-        painter: _HeaderWavePainter() ),
+        painter: _HeaderWavePainter(color) ),
     );
   }
 }
 
 class _HeaderWavePainter extends CustomPainter {
+
+  final Color color;
+
+  _HeaderWavePainter(this.color);
+
   @override
   void paint(Canvas canvas, Size size) {
 
     final lapiz = Paint();
 
     // Propiedades
-    lapiz.color = const Color(0xff615AAB);
+    lapiz.color = color; // const Color(0xff615AAB);
     lapiz.style = PaintingStyle.fill; // PaintingStyle.stroke; 
     lapiz.strokeWidth = 20;
 

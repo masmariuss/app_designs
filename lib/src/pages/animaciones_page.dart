@@ -132,6 +132,7 @@ class _Rectangulo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       width: 70,
       height: 70,

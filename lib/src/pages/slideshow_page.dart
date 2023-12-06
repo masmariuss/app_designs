@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
+import '../theme/theme.dart';
 import '../widgets/slideshow.dart';
 
 
@@ -25,11 +27,15 @@ class MiSlideshow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
+    final indicatorColor = appTheme.currentTheme.indicatorColor;
+
     return Slideshow(
       bulletPrimario: 12,
       bulletSecundario: 8,
       dotsUp: false,
-      // dotsColorPrimario: Colors.black87,
+      dotsColorPrimario: (appTheme.darkTheme) ? indicatorColor : const Color(0xFF26A69A),
       // dotsColorSecundario: Colors.black12,
       slides: [
         SvgPicture.asset('assets/svg/slide-1.svg'),

@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../theme/theme.dart';
 
 
 class SliverListPage extends StatelessWidget {
@@ -30,11 +32,14 @@ class _BotonNewList extends StatelessWidget {
   Widget build(BuildContext context) {
     
     final size = MediaQuery.of(context).size;
+    final appTheme = Provider.of<ThemeChanger>(context);
 
     return ButtonTheme(
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xffED6762),
+          backgroundColor: (appTheme.darkTheme) 
+            ? appTheme.indicatorColor 
+            : const Color(0xffED6762),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(40))
           )),
@@ -42,11 +47,11 @@ class _BotonNewList extends StatelessWidget {
         child: SizedBox(
           height: size.height*0.12,
           width: size.width*0.8,
-          child: const Center(
+          child: Center(
             child: Text(
               'CREATE NEW LIST',
               style: TextStyle(
-                color: Colors.white,
+                color: appTheme.currentTheme.scaffoldBackgroundColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 2
@@ -74,6 +79,9 @@ class _MainScroll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return CustomScrollView(
       slivers: <Widget>[
 
@@ -91,7 +99,7 @@ class _MainScroll extends StatelessWidget {
             maxheight: 200,
             child: Container(
               alignment: Alignment.centerLeft,
-              color: Colors.white,
+              color: appTheme.scaffoldBackgroundColor,
               child: _Titulo(),
             )
           ),
@@ -143,12 +151,22 @@ class _Titulo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Column(
       children: [
         const SizedBox(height:30),
         Container(
           margin: const EdgeInsets.only(left: 8, top: 24),
-          child: const Text('New', style: TextStyle(color: Color(0xff532128), fontSize: 48)),
+          child: Text('New', 
+            style: TextStyle(
+              color: (appTheme.darkTheme) 
+                ? Colors.grey 
+                : const Color(0xff532128), 
+              fontSize: 48
+            )
+          ),
         ),
         Stack(
           children: [
@@ -160,12 +178,23 @@ class _Titulo extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 28),
                 width: 120,
                 height: 8,
-                color: const Color(0xffF7CDD5),
+                color: (appTheme.darkTheme) 
+                  ? Colors.grey 
+                  : const Color(0xffF7CDD5),
               ),
             ),
             Container(
               margin: const EdgeInsets.only(left: 26) ,
-              child: const Text('List', style: TextStyle(color: Color(0xffD93A30), fontSize: 48, fontWeight: FontWeight.bold),))
+              child: Text('List', 
+                style: TextStyle(
+                  color: (appTheme.darkTheme) 
+                    ? appTheme.indicatorColor 
+                    :const Color(0xffD93A30), 
+                  fontSize: 48, 
+                  fontWeight: FontWeight.bold
+                ),
+              )
+            )
           ],
         )
       ],
@@ -207,21 +236,24 @@ class _ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     return Container(
       height: 130,
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.symmetric(vertical:10, horizontal: 16),
       padding:const EdgeInsets.all(30),
       decoration: BoxDecoration(
-        color: color,
+        color: (appTheme.darkTheme) ? Colors.blueGrey[700] : color,
         borderRadius: BorderRadius.circular(28)
       ),
       child: Text(
         titulo, 
         style: const TextStyle(
-        color: Colors.white,
-        fontSize: 18,
-        fontWeight: FontWeight.bold
+          color: Colors.white,
+          fontSize: 18,
+          fontWeight: FontWeight.bold
         ),
       ),
     );
